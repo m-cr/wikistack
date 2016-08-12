@@ -18,6 +18,8 @@ app.get('/', function(req, res, next){
 	res.render('index', {});
 });
 
+app.use('/wiki', require('./routes/wiki'));
+
 models.User.sync({})
 .then(function(){
 	return models.Page.sync({})
