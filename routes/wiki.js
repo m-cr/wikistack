@@ -18,9 +18,10 @@ router.post('/', function(req, res, next){
 		content: content
 	});
 	page.save()
-	.then(function(){
-		res.redirect(page.route);
-	});
+	.then(function(savedPage){
+		res.redirect(savedPage.route);
+	})
+	.catch(next);
 });
 
 router.get('/add', function(req, res, next){
@@ -34,7 +35,7 @@ router.get('/:wikititle', function(req, res, next){
  		}
 	})
 	.then(function(foundPage){
-		res.json(foundPage);
+		res.render('wikipage', {page: foundPage});
 	})
 	.catch(next);
 });
